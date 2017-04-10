@@ -47,6 +47,7 @@ class ServerSolution implements AccountServer {
 	
 	private boolean newAccountFactory(String type, String name, float balance)
 		throws IllegalArgumentException {
+		Boolean didCreate = false;
 		
 		if (accountMap.get(name) != null) return false;
 		
@@ -62,10 +63,11 @@ class ServerSolution implements AccountServer {
 		}
 		try {
 			accountMap.put(acc.getName(), acc);
+			didCreate = true;
 		} catch (Exception exc) {
-			return false;
+			didCreate = false;
 		}
-		return true;
+		return didCreate;
 	}
 
 	public boolean newAccount(String type, String name, float balance) 
